@@ -48,16 +48,19 @@
             console.log(result);
 
             set_table(result, sudoku.size, CLASS_NAME, document);
+
+            return 0;
         }
 
         const CLASS_NAME = 'cell';
         const size = 9;
+        var html;
+        var element;
 
-        var html = get_table(size, size, CLASS_NAME, "validate_input");
+        html = get_table(size, size, CLASS_NAME, "validate_input");
         html += get_button("solve");
         // console.log(html);
-        var element = document.createElement("my_stuff");
-
+        element = document.createElement("my_stuff");
         element.innerHTML = html;
         document.body.appendChild(element);
         
