@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+    <script src="test.js">
+    </script>
+    <script src="SudokuSolver.js">
+    </script>
+</head>
+<body>
+    <script>
+        var preset0 = [ 1,2,3,4,5,6,7,8,9,
+                        4,5,6,1,2,3,0,0,0,
+                        7,8,9,0,0,0,0,0,0,
+                        2,1,4,0,0,0,0,0,0,
+                        3,6,7,0,0,0,0,0,0,
+                        5,9,8,0,0,0,0,0,0,
+                        6,3,1,0,0,0,0,0,0,
+                        8,4,2,0,0,0,0,0,0,
+                        9,7,5,0,0,0,0,0,0];
+
+        function solve()
+        {
+            var elements;
+            var values;
+            var sudoku;
+            var result;
+
+            elements = document.getElementsByClassName(CLASS_NAME);
+            values = get_values(elements);
+
+            // values = preset0;
+            sudoku = new SudokuSolver(size);
+
+            // sudoku.Display(values);
+
+            if ((result = sudoku.Validate(values)) < 0)
+                return -1;
+            
+            // result = sudoku.FindPivot(values);
+            // console.log(result);
+
+            result = sudoku.Solve(values);
+            console.log(result);
+        }
+
+        const CLASS_NAME = 'cell';
+        const size = 9;
+
+        var html = get_table(size, size, CLASS_NAME, "validate_input");
+        html += get_button("solve");
+        // console.log(html);
+        var element = document.createElement("my_stuff");
+
+        element.innerHTML = html;
+        document.body.appendChild(element);
+
+    </script>
+    <!-- <button onclick="solve">solve2</button> -->
+</body>
+</html>
