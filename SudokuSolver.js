@@ -8,7 +8,7 @@ class SudokuSolver
     {
         this.size = size;
         this.block_size = Math.sqrt(size);
-        this.max_value = Math.pow(2, size) - 1;
+        this.max_value = Math.pow(2, size + 1) - 2;
     }
 
     IndexToCoordinates(index)
@@ -180,8 +180,8 @@ class SudokuSolver
         var bit;
         var n;
 
-        n = 0;
-        bit = 1;
+        n = 1;
+        bit = 2;
         while (bit < this.max_value)
         {
             if ((bit & integer) == 0)
@@ -210,23 +210,24 @@ class SudokuSolver
         status |= block_status;
         status |= used_values;
 
-        return this.#get_next_unused_bit(status) + 1;
+        return this.#get_next_unused_bit(status);
     }
 
     #check_bit(integer, n)
     {
-        return integer & n;
+        return integer & (1 << n);
     }
 
     #set_bit(integer, n)
     {
-        return integer | n;
+        return integer | (1 << n);
     }
 
     GetStatus(values)
     {
         var status;
         var value;
+        // var bit;
         var n;
 
         status = 0;
@@ -236,7 +237,7 @@ class SudokuSolver
             value = values[n];
             if (value != 0)
             {
-                value = 1 << (value - 1);
+                // bit = this.#set_bit(0, value);
                 if (this.#check_bit(status, value))
                     return -1;
                 status = this.#set_bit(status, value);
@@ -371,7 +372,7 @@ class SudokuSolver
         var board_copy;
         var solved_board;
 
-        this.Display(board);
+        // this.Display(board);
         //
         pivot = this.FindPivot(board);
 
@@ -387,7 +388,7 @@ class SudokuSolver
                 return null;
             
             board_copy = this.CopyBoard(board);
-            used_values = this.#set_bit(used_values, value - 1);
+            used_values = this.#set_bit(used_values, value);
             board_copy = this.Set(board_copy, pivot[0], pivot[1], value);
 
             solved_board = this.Solve(board_copy);
