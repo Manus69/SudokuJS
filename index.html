@@ -14,15 +14,14 @@
 <body>
     <h2>Enter a sudoku puzzle below</h2>
     <script>
-        var preset0 = [ 1,2,3,4,5,6,7,8,9,
-                        4,5,6,1,2,0,0,0,0,
-                        7,8,9,0,0,0,0,0,0,
-                        2,1,4,0,0,0,0,0,0,
-                        3,6,7,0,0,0,0,0,0,
-                        5,9,8,0,0,0,0,0,0,
-                        6,3,1,0,0,0,0,0,0,
-                        8,4,2,0,0,0,0,0,0,
-                        9,7,5,0,0,0,0,0,0];
+
+        function clear_table()
+        {
+            var values;
+
+            values = new Array(SIZE * SIZE).fill("");
+            set_table(values, SIZE, CLASS_NAME, document);
+        }
 
         function solve()
         {
@@ -33,11 +32,7 @@
 
             elements = document.getElementsByClassName(CLASS_NAME);
             values = get_values(elements);
-
-            // values = preset0;
-            sudoku = new SudokuSolver(size);
-
-            sudoku.Display(values);
+            sudoku = new SudokuSolver(SIZE);
 
             if ((result = sudoku.Validate(values)) < 0)
             {
@@ -47,20 +42,20 @@
 
             result = sudoku.Solve(values);
             console.log(result);
-
             set_table(result, sudoku.size, CLASS_NAME, document);
 
             return 0;
         }
 
         const CLASS_NAME = 'cell';
-        const size = 9;
+        const SIZE = 9;
         var html;
         var element;
 
-        html = get_table(size, size, CLASS_NAME, "validate_input");
-        html += get_button("solve");
-        // console.log(html);
+        html = get_table(SIZE, SIZE, CLASS_NAME, "validate_input");
+        html += get_button("solve", "Solve");
+        html += get_button("clear_table", "Clear");
+
         element = document.createElement("my_stuff");
         element.innerHTML = html;
         document.body.appendChild(element);

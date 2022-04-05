@@ -57,9 +57,9 @@ function set_table(values, size, class_name, _document)
     }
 }
 
-function get_button(action)
+function get_button(action, text)
 {
-    return `<button onclick="${action}()">Solve</button>`;
+    return `<button onclick="${action}()">${text}</button>`;
 }
 
 function is_digit(text)

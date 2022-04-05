@@ -227,7 +227,6 @@ class SudokuSolver
     {
         var status;
         var value;
-        // var bit;
         var n;
 
         status = 0;
@@ -237,7 +236,6 @@ class SudokuSolver
             value = values[n];
             if (value != 0)
             {
-                // bit = this.#set_bit(0, value);
                 if (this.#check_bit(status, value))
                     return -1;
                 status = this.#set_bit(status, value);

@@ -50,6 +50,12 @@ button
     padding: 10px;
     font-size: large;
     background:darkcyan;
+    transition-duration: 0.5s;
+}
+
+button:hover
+{
+    background-color: brown;
 }
 
 h2
